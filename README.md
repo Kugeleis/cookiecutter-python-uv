@@ -33,7 +33,7 @@ cookiecutter .
 
 ## Requirements
 
-- Python 3.11+
+- Python 3.12+
 - [uv](https://github.com/astral-sh/uv) (recommended) or pip
 - cookiecutter
 
