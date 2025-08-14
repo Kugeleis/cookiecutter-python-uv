@@ -1,0 +1,81 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "{{ project_slug }}"
+version = "{{ version }}"
+description = "{{ project_description }}"
+readme = "README.md"
+requires-python = ">={{ python_version }}"
+license = { text = "{{ license }}" }
+authors = [
+    { name = "{{ author_name }}", email = "{{ author_email }}" },
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: {{ python_version }}",
+    "Programming Language :: Python :: 3",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    {% if use_ruff %}"ruff>=0.3.0",{% endif %}
+    "ipykernel>=6.29.0",
+    {% if use_pytest %}"pytest>=8.0.0",
+    "pytest-cov>=4.0.0",{% endif %}
+    {% if use_mypy %}"mypy>=1.9.0",{% endif %}
+    {% if use_pre_commit %}"pre-commit>=3.6.0",{% endif %}
+]
+
+[project.urls]
+"Homepage" = "https://github.com/{{ author_name }}/{{ project_slug }}"
+"Bug Tracker" = "https://github.com/{{ author_name }}/{{ project_slug }}/issues"
+
+{% if use_ruff %}
+[tool.ruff]
+line-length = 88
+target-version = "py{{ python_version.replace('.', '') }}"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+    "N",   # pep8-naming
+]
+ignore = [
+    "E501",  # line too long (handled by formatter)
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+{% endif %}
+
+{% if use_mypy %}
+[tool.mypy]
+python_version = "{{ python_version }}"
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+{% endif %}
+
+{% if use_pytest %}
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q --cov={{ project_slug }} --cov-report=term-missing --cov-report=html"
+testpaths = ["tests"]
+{% endif %}
