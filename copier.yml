@@ -1,4 +1,6 @@
 # Questions asked when generating the project
+_subdirectory: template
+
 project_name:
   type: str
   default: "My Python Project"
