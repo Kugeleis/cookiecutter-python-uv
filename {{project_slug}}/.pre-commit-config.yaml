@@ -8,14 +8,14 @@ repos:
       - id: check-added-large-files
       - id: check-toml
 
-  - repo: https://github.com/astral-sh/ruff-pre-commit
+  {% if use_ruff %}- repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.3.7
     hooks:
       - id: ruff
         args: [--fix]
-      - id: ruff-format
+      - id: ruff-format{% endif %}
 
-  {% if cookiecutter.use_mypy == "y" %}- repo: https://github.com/pre-commit/mirrors-mypy
+  {% if use_mypy %}- repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.9.0
     hooks:
       - id: mypy
