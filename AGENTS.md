@@ -4,11 +4,12 @@ This document outlines best practices for working with this Python project. Adhe
 
 ## 1. Dependency Management with `uv`
 
-This project uses `uv` for dependency management. `uv` is a fast, modern Python package installer and resolver.
+This project uses `uv` for package and project management.
 
-- **Installation:** To install dependencies, use `uv pip install -r requirements.txt`.
-- **Adding a dependency:** Add the new dependency to `pyproject.toml` under the `[project.dependencies]` section and then run `uv pip sync`.
-- **Locking:** After adding or updating dependencies, ensure you sync the lock file if one is being used.
+- **Create a virtual environment:** `uv venv`
+- **Activate the environment:** `source .venv/bin/activate`
+- **Add a dependency:** `uv add <package-name>`
+- **Install dependencies:** `uv sync`
 
 ## 2. Linting and Formatting with `ruff`
 
