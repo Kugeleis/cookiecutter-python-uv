@@ -7,7 +7,6 @@ This document outlines best practices for working with this Python project. Adhe
 This project uses `uv` for package and project management.
 
 - **Create a virtual environment:** `uv venv`
-- **Activate the environment:** `source .venv/bin/activate`
 - **Add a dependency:** `uv add <package-name>`
 - **Install dependencies:** `uv sync`
 
